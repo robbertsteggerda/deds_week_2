@@ -1,0 +1,110 @@
+RETAILER_CODE,RETAILER_CODEMR,RETAILER_company_name,RETAILER_TYPE_CODE,RETAILER_TYPE_name,RETAILER_NAME,ADDRESS1,ADDRESS2,CITY,REGION,COUNTRY_CODE,SEGMENT_CODE,LANGUAGE,SEGMENT_NAME,SEGMENT_DESCRIPTION
+1,,ActiForme,5,Equipment Rental Store,,,,,,,,,,
+100,70,Golf Masters,1,Golf Shop,Golf Masters,2845 South Second Street,,Lincoln,Nebraska,3,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+101,71,The Marketplace,2,Department Store,The Marketplace,1902 Lancaster Street,,New York,New York,3,5,EN,Department Store,Offers a wide range of goods.
+102,72,Camping Equipment Online,3,Direct Marketing,Camping Equipment Online,332 South Main Street,P.O. Box 224,Hanover,New Hampshire,3,7,EN,Direct Marketing,"Offers a wide range of goods through mail order, telephone or Internet sales."
+103,73,Tamarack Outfitter Rentals,5,Equipment Rental Store,Tamarack Outfitter Rentals,582 NE Tomahawk Island Drive,,Portland,Oregon,3,9,EN,Equipment Rental Store,Offers various sports and outdoors equipment for short or long term rental.
+104,74,Extreme Outdoors,6,Outdoors Shop,Extreme Outdoors,83 Nirson Road,,Houston,Texas,3,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+105,75,Eye Dimensions,7,Eyewear Store,Eye Dimensions,832 Vensa Crescent,,Dallas,Texas,3,10,EN,Eyewear Store,Primarily offers prescription and fashion eyewear.
+106,76,Donovan's Sports,8,Sports Store,Donovan's Sports,932 Ohmey Avenue,,Los Angeles,California,3,12,EN,Sports Store,Primarily offers a wide range of sporting goods.
+108,78,Trail Masters,6,Outdoors Shop,Trail Masters,2189 Louisville Road,,Frankfurt,Kentucky,3,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+109,79,Second Wind Sports,8,Sports Store,Second Wind Sports,283 Mondela Street,,Dallas,Texas,3,12,EN,Sports Store,Primarily offers a wide range of sporting goods.
+110,80,The Golf Hut,1,Golf Shop,The Golf Hut,1488 Orleans Road,P.O. Box 1128,Charleston,South Carolina,3,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+111,81,Buena Vista Eyeware,7,Eyewear Store,Buena Vista Eyeware,172 N. Cave Creek Road,,Phoenix,Arizona,3,10,EN,Eyewear Store,Primarily offers prescription and fashion eyewear.
+112,,Jack and Jill Climbing School & Supplies,6,Outdoors Shop,,,,,,,,,,
+113,82,Edward's Department Store,2,Department Store,Edward's Department Store,325 Wayside Street,,Seattle,Washington,3,5,EN,Department Store,Offers a wide range of goods.
+114,,Parkland Camping Rentals,5,Equipment Rental Store,,,,,,,,,,
+115,83,Consumer Club,4,Warehouse Store,Consumer Club,333 Ustaff Way,Suite 67,San Diego,California,3,8,EN,Warehouse Store,Offers a wide range of goods in a large warehouse setting with a minimum of service available.
+116,84,Connor Department Store,2,Department Store,Connor Department Store,937 Hilson Crescent,Suite 2-4,Boston,Massachusetts,3,5,EN,Department Store,Offers a wide range of goods.
+117,85,By A Thread,6,Outdoors Shop,By A Thread,231 Linson Street,,Boulder,Colorado,3,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+118,86,Hartman's,2,Department Store,Hartman's,3866 Point Circle,,Little Rock,Arkansas,3,5,EN,Department Store,Offers a wide range of goods.
+119,87,Mega-Outlet,4,Warehouse Store,Mega-Outlet,1655 East Superior Street,,Duluth,Minnesota,3,8,EN,Warehouse Store,Offers a wide range of goods in a large warehouse setting with a minimum of service available.
+120,,Pumped!,8,Sports Store,,,,,,,,,,
+121,88,The Caddy's Corner,1,Golf Shop,The Caddy's Corner,1529 Kapahula Avenue,,Honolulu,Hawaii,3,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+122,,Up The Creek,5,Equipment Rental Store,,,,,,,,,,
+123,89,American Home,2,Department Store,American Home,1290 21st Ave. SW,,Cedar Rapids,Iowa,3,5,EN,Department Store,Offers a wide range of goods.
+124,90,Weston Outfitters,6,Outdoors Shop,Weston Outfitters,738 Greyling Street,,San Diego,California,3,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+125,233,La bonne Forme,8,Sports Store,La bonne Forme,"67, avenue Daumesnil",Boîte postale 16,Marseille,,1,11,EN,Sports Store - Exclusive,Primarily offers a wide range of sporting goods.  Concentrates on offering higher priced merchandise.
+126,91,"Artículos de Campismo El Aquila, S.A. de C.V.",6,Outdoors Shop,"Artículos de Campismo El Aquila, S.A. de C.V.",Avda. Chapultepec 246-303,Virreyes,Distrito Federal,México,20,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+127,92,"Todo para el Golf, S.A. de C.V.",1,Golf Shop,"Todo para el Golf, S.A. de C.V.",Francisco Munguía No. 45,Atahualpa,Monterey,Nuevo León,20,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+128,93,"MER-KA-DOS, S.A. de C.V.",2,Department Store,"MER-KA-DOS, S.A. de C.V.","Río Rhin 56, Piso 6",Cuauhtemoc,Distrito Federal,México,20,5,EN,Department Store,Offers a wide range of goods.
+129,235,Golf Shop Jiro,1,Golf Shop,Golf Shop Jiro,232-87-515 Zundabashi,Miyagino-ku,Sendai City,Miyagi,11,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+130,236,Japan Sports Youhinten,8,Sports Store,Japan Sports Youhinten,1-1-1 Hamakubo,,Shibuya-ku,Tokyo,11,12,EN,Sports Store,Primarily offers a wide range of sporting goods.
+131,237,Hinode Megane,7,Eyewear Store,Hinode Megane,23-1-9 Jingukoen Mae,,Koto-ku,Tokyo,11,10,EN,Eyewear Store,Primarily offers prescription and fashion eyewear.
+132,238,Hanagata Golf Shop,1,Golf Shop,Hanagata Golf Shop,78-98-390 Tenno,Naka-ku,Fukuoka City,Fukuoka,11,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+133,,Kitanaka Tozanyouhinten,5,Equipment Rental Store,,,,,,,,,,
+134,239,Kanjosen Sport,8,Sports Store,Kanjosen Sport,11-33-11 Hita,Hita-ku,Osaka City,Osaka,11,11,EN,Sports Store - Exclusive,Primarily offers a wide range of sporting goods.  Concentrates on offering higher priced merchandise.
+135,,Chuei Hyakkaten,2,Department Store,,,,,,,,,,
+136,240,NIPPON Sofcon Net,3,Direct Marketing,NIPPON Sofcon Net,346-126 Nishikamakuracho,Nakano-ku,Hiroshima City,Hiroshima,11,7,EN,Direct Marketing,"Offers a wide range of goods through mail order, telephone or Internet sales."
+137,625,Campingspecialisten,6,Outdoors Shop,Campingspecialisten,Eliassons väg 3,,Åtvidaberg,,10,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+138,616,Sport Jonas,8,Sports Store,Sport Jonas,Apoteksgatan 2,,Bollnäs,,10,11,EN,Sports Store - Exclusive,Primarily offers a wide range of sporting goods.  Concentrates on offering higher priced merchandise.
+140,,T & R Sport,3,Direct Marketing,,,,,,,,,,
+141,526,Sportworld,2,Department Store,Sportworld,Kalfjeslaan 47,,Amstelveen,,7,4,EN,Department Store - Exclusive,Offers a wide range of goods.  Concentrates on offering more expensive products and on providing a high level of service.
+142,527,Topforma,3,Direct Marketing,Topforma,Noorderspoorsingel 28,,Groningen,,7,6,EN,Direct Marketing - Exclusive,"Offers a wide range of goods through mail order, telephone or Internet sales.  Concentrates on offering more expensive products."
+143,,Get Out,5,Equipment Rental Store,,,,,,,,,,
+144,529,Holland Zonzoekers,1,Golf Shop,Holland Zonzoekers,Westhavenweg 8,,Amsterdam,,7,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+145,530,Beter Buitenleven,6,Outdoors Shop,Beter Buitenleven,Havenbuurt 12,,Marken,,7,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+146,531,Extra Sport,8,Sports Store,Extra Sport,Stadhouderslaan 18,,Rotterdam,,7,11,EN,Sports Store - Exclusive,Primarily offers a wide range of sporting goods.  Concentrates on offering higher priced merchandise.
+147,485,NonSoloNeve,8,Sports Store,NonSoloNeve,Corso XXII Marzo 69,,Bologna,,6,11,EN,Sports Store - Exclusive,Primarily offers a wide range of sporting goods.  Concentrates on offering higher priced merchandise.
+148,486,Paradiso della Tenda,6,Outdoors Shop,Paradiso della Tenda,Via Industriale 76,,Torino,,6,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+149,,Bellini,1,Golf Shop,,,,,,,,,,
+15,234,SportsClub,1,Golf Shop,SportsClub,"34, route de Marseille",,Nice,,1,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+150,,Brambilla,2,Department Store,,,,,,,,,,
+155,401,Beach Beds Pty Ltd.,2,Department Store,Beach Beds Pty Ltd.,2415 Queen's Ave,,Melbourne,VIC,16,4,EN,Department Store - Exclusive,Offers a wide range of goods.  Concentrates on offering more expensive products and on providing a high level of service.
+156,412,Blue Mountains Golfing Company,1,Golf Shop,Blue Mountains Golfing Company,956 Steel St.,,Sydney,NSW,16,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+157,402,Kanga Kampers,6,Outdoors Shop,Kanga Kampers,120 Southern Ocean Dr,Unit 16,Brisbane,VIC,16,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+158,543,Naranco de Bulnes,6,Outdoors Shop,Naranco de Bulnes,"Atlántico, 56",,Barcelona,Barcelona,19,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+159,548,Ocio y Aventura,2,Department Store,Ocio y Aventura,"Carrera de Oriente, 58-5",,Madrid,Madrid,19,4,EN,Department Store - Exclusive,Offers a wide range of goods.  Concentrates on offering more expensive products and on providing a high level of service.
+160,437,Esportes Grumari,2,Department Store,Esportes Grumari,"Alameda Santos, 9876",6o. Andar,São Paulo,SP,21,5,EN,Department Store,Offers a wide range of goods.
+161,465,Preben's Tøy,6,Outdoors Shop,Preben's Tøy,Århusgade 55,,Kolding,,18,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+168,481,Arjan Aitta,6,Outdoors Shop,Arjan Aitta,Yrittäjänkatu 21,,Tampere,,22,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+170,,Hansung Golf,1,Golf Shop,,,,,,,,,,
+171,499,Taeho Sports,8,Sports Store,Taeho Sports,"56-3, Namchun-Dong",Suyoung-Ku,Pusan,,13,12,EN,Sports Store,Primarily offers a wide range of sporting goods.
+172,575,"Chen Yu Enterprise Co.,",2,Department Store,"Chen Yu Enterprise Co.,","75, Choung Yi Road",,Tu Cherng,Taipei,12,5,EN,Department Store,Offers a wide range of goods.
+173,580,Fu Chin Sport Equipment Co.,3,Direct Marketing,Fu Chin Sport Equipment Co.,"19, Wu Chiuan 2 Road",,Wu Gu Industrial Zone,Taipei,12,7,EN,Direct Marketing,"Offers a wide range of goods through mail order, telephone or Internet sales."
+174,573,Hai Wan Shin Sport Equipment Co.,1,Golf Shop,Hai Wan Shin Sport Equipment Co.,"100-1, Gin-Ping Road",,Choung Ho,Taipei,12,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+175,454,"Hangzhou Superman Sports Goods Co., LTD.",1,Golf Shop,"Hangzhou Superman Sports Goods Co., LTD.",59 Yang Fang Dian West,Hai Dian District,Beijing,,14,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+176,456,"China Multi-channel Sports Co., LTD.",3,Direct Marketing,"China Multi-channel Sports Co., LTD.",No.318 Huan Cheng Bei Road,,Hangzhou,Zhejiang,14,7,EN,Direct Marketing,"Offers a wide range of goods through mail order, telephone or Internet sales."
+177,455,"Lan King Sports Co., LTD.",6,Outdoors Shop,"Lan King Sports Co., LTD.",No.339 Huan Shi Dong Road,,Guangzhou,GuangDong,14,1,EN,Outdoors Shop - Exclusive,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities.  Concentrates on offering more expensive gear and on providing a high level of service."
+178,,Beck's Sports Store,8,Sports Store,,,,,,,,,,
+179,,Browns Opticals,7,Eyewear Store,,,,,,,,,,
+180,587,Hurst Ironmongers,1,Golf Shop,Hurst Ironmongers,The Beeches,14 Church Street,Bristol,Avon,9,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+181,585,Jensen Mountaineering,6,Outdoors Shop,Jensen Mountaineering,139 Page Street,,London,,9,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+182,586,Leisure Land,2,Department Store,Leisure Land,Kelvin House,Talisman Road,Birmingham,West Midlands,9,5,EN,Department Store,Offers a wide range of goods.
+183,589,Outdoor Experience,6,Outdoors Shop,Outdoor Experience,Seaton House,3 Aberford Road,Reading,Berkshire,9,1,EN,Outdoors Shop - Exclusive,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities.  Concentrates on offering more expensive gear and on providing a high level of service."
+184,,Romford Tools Ltd,3,Direct Marketing,,,,,,,,,,
+185,,Alles für Draußen,3,Direct Marketing,,,,,,,,,,
+186,561,Arnold's Clubs,1,Golf Shop,Arnold's Clubs,"89, route d'Evian",,Genève,,8,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+188,557,Windsurfing Zürichsee,8,Sports Store,Windsurfing Zürichsee,Kirchstraße 66,,Zürich,,8,12,EN,Sports Store,Primarily offers a wide range of sporting goods.
+189,425,Golf's'us,1,Golf Shop,Golf's'us,Leuvensesteenweg 325,,Zaventem,,17,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+193,428,Allo Allo,3,Direct Marketing,Allo Allo,Avenue des 9 Provinces 3,B 109,Bruxelles,,17,7,EN,Direct Marketing,"Offers a wide range of goods through mail order, telephone or Internet sales."
+194,429,Caravanserai,6,Outdoors Shop,Caravanserai,Boul. De La Sauvenière 12,,Liège,,17,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+209,415,Ausrüstungshaus Globetrotter,2,Department Store,Ausrüstungshaus Globetrotter,Hüttenstraße 87,,Klosterneuburg,,5,5,EN,Department Store,Offers a wide range of goods.
+210,,Golfer-Paradies,1,Golf Shop,,,,,,,,,,
+211,414,Outdoor-Fachgeschäft Müller,6,Outdoors Shop,Outdoor-Fachgeschäft Müller,Hofstraße 77,,Wien,,5,1,EN,Outdoors Shop - Exclusive,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities.  Concentrates on offering more expensive gear and on providing a high level of service."
+23,229,Anapurna,3,Direct Marketing,Anapurna,"30, boul. de Québec",,Orléans,,1,7,EN,Direct Marketing,"Offers a wide range of goods through mail order, telephone or Internet sales."
+32,230,Cordages Discount,4,Warehouse Store,Cordages Discount,"2, rue des Ponchettes",,Nice,,1,8,EN,Warehouse Store,Offers a wide range of goods in a large warehouse setting with a minimum of service available.
+33,228,Altitudes extrêmes,6,Outdoors Shop,Altitudes extrêmes,"15, rue Capdeville",,Bordeaux,,1,1,EN,Outdoors Shop - Exclusive,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities.  Concentrates on offering more expensive gear and on providing a high level of service."
+34,,Optique et Lentilles,7,Eyewear Store,,,,,,,,,,
+35,231,Camping Sauvage,6,Outdoors Shop,Camping Sauvage,"45, rue Vaubecour",,Lyon,,1,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+37,232,Grand choix,2,Department Store,Grand choix,"205, rue Richelieu",,Tours,,1,4,EN,Department Store - Exclusive,Offers a wide range of goods.  Concentrates on offering more expensive products and on providing a high level of service.
+44,,Die Fitness-Experten,3,Direct Marketing,,,,,,,,,,
+47,23,Der Fitness-Doktor,8,Sports Store,Der Fitness-Doktor,Porschestraße 54,,Bonn,,2,12,EN,Sports Store,Primarily offers a wide range of sporting goods.
+48,24,Sport & Freizeit,2,Department Store,Sport & Freizeit,Kaiserstraße 37,,Dresden,,2,5,EN,Department Store,Offers a wide range of goods.
+49,25,Holstein Golf,1,Golf Shop,Holstein Golf,Jubelstraße 23,,Berlin,,2,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+50,26,Die Zeltstadt,4,Warehouse Store,Die Zeltstadt,Leibnitzstraße 53,,Kiel,,2,8,EN,Warehouse Store,Offers a wide range of goods in a large warehouse setting with a minimum of service available.
+51,,Extrem!,6,Outdoors Shop,,,,,,,,,,
+54,27,In die Berge!,6,Outdoors Shop,In die Berge!,Am Mainkai 17,,Frankfurt,,2,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+57,45,Rad und Tat,3,Direct Marketing,Rad und Tat,Am Yachthafen 5,,Hamburg,,2,6,EN,Direct Marketing - Exclusive,"Offers a wide range of goods through mail order, telephone or Internet sales.  Concentrates on offering more expensive products."
+58,28,Weitblick,7,Eyewear Store,Weitblick,Händelstraße 81,,Bremen,,2,10,EN,Eyewear Store,Primarily offers prescription and fashion eyewear.
+89,1,Rock Steady,6,Outdoors Shop,Rock Steady,"45, rue Atwater",,Montréal,Québec,4,2,EN,Outdoors Shop,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities"
+90,2,Ultra Sports,8,Sports Store,Ultra Sports,"2425, rue Peel",,Montréal,Québec,4,11,EN,Sports Store - Exclusive,Primarily offers a wide range of sporting goods.  Concentrates on offering higher priced merchandise.
+91,3,Mountain Madness,3,Direct Marketing,Mountain Madness,56 North Way Street,,Whitehorse,Yukon,4,7,EN,Direct Marketing,"Offers a wide range of goods through mail order, telephone or Internet sales."
+92,4,VIP Department Stores,2,Department Store,VIP Department Stores,"Suite 125, 129th Street",,Vancouver,British Columbia,4,4,EN,Department Store - Exclusive,Offers a wide range of goods.  Concentrates on offering more expensive products and on providing a high level of service.
+93,8,Le Golfeur,1,Golf Shop,Le Golfeur,"500, Place d'Armes",Bureau 1061,Montréal,Québec,4,3,EN,Golf Shop,Primarily offers golf equipment and accessories.
+94,,Sunglass Corner,7,Eyewear Store,,,,,,,,,,
+95,5,Falcon Outfitters,6,Outdoors Shop,Falcon Outfitters,9755 Riverside Drive,,Ottawa,Ontario,4,1,EN,Outdoors Shop - Exclusive,"Primarily offers camping supplies, hiking equipment, and other gear for outdoor activities.  Concentrates on offering more expensive gear and on providing a high level of service."
+96,6,Maximum Sports,8,Sports Store,Maximum Sports,"Suite 12, 801 Dundas Street",,Toronto,Ontario,4,12,EN,Sports Store,Primarily offers a wide range of sporting goods.
+97,7,Act'N'Up Fitness,4,Warehouse Store,Act'N'Up Fitness,"87, 2399 Sommerset Avenue",,Toronto,Ontario,4,8,EN,Warehouse Store,Offers a wide range of goods in a large warehouse setting with a minimum of service available.
+98,,Advanced Climbing Ltd,5,Equipment Rental Store,,,,,,,,,,
+99,69,Outdoor Gear Co-op,4,Warehouse Store,Outdoor Gear Co-op,4378 Wyse Avenue,,Boston,Massachusetts,3,8,EN,Warehouse Store,Offers a wide range of goods in a large warehouse setting with a minimum of service available.
