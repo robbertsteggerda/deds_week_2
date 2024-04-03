@@ -47,10 +47,6 @@ crm_db = sqlite3.connect("Databases/GreatOutdoors/go_crm.sqlite")
 age_group = pd.read_sql_query("SELECT * FROM age_group;", crm_db)
 
 
-
-
-# print(course)
-
 def import_product():
     # Product
     transformed_product = []
