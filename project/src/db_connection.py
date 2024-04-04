@@ -85,7 +85,7 @@ def import_orders():
     order_count = 0
     for index, row in order.iterrows():
         try:
-            query = f"INSERT INTO orders VALUES ({row['ORDER_NUMBER']},  '{escape_single_quotes(row['RETAILER_NAME'])}', '{row['ORDER_DATE']}', {get_day(row['ORDER_DATE'])}, {get_month(row['ORDER_DATE'])}, {get_year(row['ORDER_DATE'])}, {row['ORDER_DETAIL_CODE']}, {row['PRODUCT_NUMBER']}, {row['QUANTITY']}, {row['UNIT_COST']}, {row['UNIT_PRICE']}, {row['UNIT_SALE_PRICE']}, {row['RETURN_CODE'] if row['RETURN_CODE'] == 'nan' else 'NULL' }, '{convert_date_format(strip_time_from_string(row['RETURN_DATE'])) if convert_date_format(strip_time_from_string(row['RETURN_DATE'])) != "NULL" else '1-1-1970' }', {row['RETURN_REASON_CODE'] if row['RETURN_REASON_CODE'] == 'nan' else "NULL"}, {row['RETURN_QUANTITY'] if row['RETURN_QUANTITY'] == 'nan' else "NULL"}, {row['ORDER_METHOD_CODE']}, {row['SALES_STAFF_CODE']}, {row['SALES_BRANCH_CODE']}, {row['RETAILER_SITE_CODE']});"
+            query = f"INSERT INTO orders VALUES ({row['ORDER_NUMBER']}, '{escape_single_quotes(row['RETAILER_NAME'])}', '{row['ORDER_DATE']}', {get_day(row['ORDER_DATE'])}, {get_month(row['ORDER_DATE'])}, {get_year(row['ORDER_DATE'])}, {row['ORDER_DETAIL_CODE']}, {row['PRODUCT_NUMBER']}, {row['QUANTITY']}, {row['UNIT_COST']}, {row['UNIT_PRICE']}, {row['UNIT_SALE_PRICE']}, {row['RETURN_CODE'] if row['RETURN_CODE'] == 'nan' else 'NULL' }, '{convert_date_format(strip_time_from_string(row['RETURN_DATE'])) if convert_date_format(strip_time_from_string(row['RETURN_DATE'])) != "NULL" else '1-1-1970' }', {row['RETURN_REASON_CODE'] if row['RETURN_REASON_CODE'] == 'nan' else "NULL"}, {row['RETURN_QUANTITY'] if row['RETURN_QUANTITY'] == 'nan' else "NULL"}, {row['ORDER_METHOD_CODE']}, {row['SALES_STAFF_CODE']}, {row['SALES_BRANCH_CODE']}, {row['RETAILER_SITE_CODE']});"
             export_cursor.execute(query)
             order_count += 1
         except pyodbc.Error as e:
@@ -198,7 +198,7 @@ def import_sales_staff():
     sales_staff_count = 0
     for index, row in sales_staff_go_staff.iterrows():
         try:
-            query = f"INSERT INTO sales_staff VALUES ({row['SALES_STAFF_CODE']}, '{escape_single_quotes(row['FIRST_NAME'])}', '{row['LAST_NAME']}', '{row['POSITION_EN']}', '{row['WORK_PHONE']}', '{row['EXTENSION']}', '{row['FAX']}', '{row['EMAIL']}',  '{row['DATE_HIRED']}',{row['SALES_BRANCH_CODE']}, {row['MANAGER_CODE']});"
+            query = f"INSERT INTO sales_staff (SALES_STAFF_CODE_PK,FIRST_NAME,LAST_NAME,POSITION_EN,WORK_PHONE,EXTENSION,FAX,EMAIL,DATE_HIRED_DATE,SALES_BRANCH_CODE, MANAGER_CODE) VALUES ({row['SALES_STAFF_CODE']}, '{escape_single_quotes(row['FIRST_NAME'])}', '{row['LAST_NAME']}', '{row['POSITION_EN']}', '{row['WORK_PHONE']}', '{row['EXTENSION']}', '{row['FAX']}', '{row['EMAIL']}',  '{row['DATE_HIRED']}',{row['SALES_BRANCH_CODE']}, {row['MANAGER_CODE']});"
             export_cursor.execute(query)
             sales_staff_count += 1
         except pyodbc.Error as e:
@@ -266,6 +266,23 @@ def import_sales_target_data():
 
 
 
+# CREATE TRIGGER update_fsk_after_pk_update
+# ON orders
+# AFTER UPDATE
+# AS
+# BEGIN
+#     UPDATE orders
+#     SET sales_staff_code_FK = (
+#         SELECT TOP 1 sales_staff_code_FSK
+#         FROM inserted
+#         WHERE sales_staff_code_fk = orders.sales_staff_code_fk
+#         ORDER BY (SELECT timestmp FROM sales_staff WHERE sales_staff_code_FK = orders.sales_staff_code_FK) DESC
+#     )
+#     FROM orders
+#     INNER JOIN inserted ON orders.sales_staff_code_fk = orders.sales_staff_code_fk;
+# END;
+
+# INSERT INTO sales_staff (SALES_STAFF_CODE_PK,FIRST_NAME,LAST_NAME,POSITION_EN,WORK_PHONE,EXTENSION,FAX,EMAIL,DATE_HIRED_DATE,SALES_BRANCH_CODE, MANAGER_CODE) VALUES (100, 'Tuomasso', 'Savolainen', 'Level 2 Sales Representative', '+358(0)17 - 433 127', '825', '+358(0)17 - 433 129', 'TSavolainen@grtd123.com',  '23-Jul-1998 12:00:00 AM',31, 18)
 
 
 

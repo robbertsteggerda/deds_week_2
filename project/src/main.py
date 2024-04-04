@@ -1,6 +1,22 @@
 from settings import *
 from db_connection import *
+import sys
+
 def main():
+   
+
+    if sys.argv[1] == '--drop-all':
+        query = f"DELETE FROM course; DELETE FROM order_method; DELETE FROM orders; DELETE FROM Product; DELETE FROM Retailer; DELETE FROM retailer_site; DELETE FROM sales_branch; DELETE FROM sales_staff; DELETE FROM SALES_TargetData; DELETE FROM SALESDATA; DELETE FROM satisfaction; DELETE FROM satisfaction_type; DELETE FROM training; DELETE FROM sales_staff; DELETE FROM country; DELETE FROM age_group; "
+        export_cursor.execute(query)
+        export_cursor.commit()
+    
+    # if sys.argv[1] == '--surrogate-test':
+    #     query = f"INSERT INTO sales_staff  (SALES_STAFF_CODE_PK,FIRST_NAME,LAST_NAME, POSITION_EN, WORK_PHONE, EXTENSION, FAX, EMAIL, DATE_HIRED_DATE, SALES_BRANCH_CODE, MANAGER_CODE) VALUES ({row['SALES_STAFF_CODE']}, '{escape_single_quotes(row['FIRST_NAME'])}', '{row['LAST_NAME']}', '{row['POSITION_EN']}', '{row['WORK_PHONE']}', '{row['EXTENSION']}', '{row['FAX']}', '{row['EMAIL']}',  '{row['DATE_HIRED']}',{row['SALES_BRANCH_CODE']}, {row['MANAGER_CODE']});"
+    #     export_cursor.execute(query)
+    #     export_cursor.commit()
+    
+    
+    
     logger.info("Loading raw data")
 
     logger.info("Moving processed data table: Product into database")
