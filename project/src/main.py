@@ -4,8 +4,8 @@ import sys
 
 def main():
    
-
-    if sys.argv[1] == '--drop-all':
+    
+    if len(sys.argv) > 1 and sys.argv[1] == '--drop-all':
         query = f"DELETE FROM course; DELETE FROM order_method; DELETE FROM orders; DELETE FROM Product; DELETE FROM Retailer; DELETE FROM retailer_site; DELETE FROM sales_branch; DELETE FROM sales_staff; DELETE FROM SALES_TargetData; DELETE FROM SALESDATA; DELETE FROM satisfaction; DELETE FROM satisfaction_type; DELETE FROM training; DELETE FROM sales_staff; DELETE FROM country; DELETE FROM age_group; "
         export_cursor.execute(query)
         export_cursor.commit()
@@ -22,8 +22,6 @@ def main():
     logger.info("Moving processed data table: Product into database")
     import_product()
 
-    logger.info("Moving processed data table: Order into database")
-    import_orders()
 
     logger.info("Moving processed data table: Order Method into database")
     import_order_method()
@@ -55,6 +53,8 @@ def main():
     logger.info("Moving processed data table: Sales Target Data into database")
     import_sales_target_data()
 
+    logger.info("Moving processed data table: Order into database")
+    import_orders()
     
 
 
