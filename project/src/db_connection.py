@@ -5,7 +5,7 @@ from settings import *
 from utils import *
 
 
-DB = {"servername": "DESKTOP-OF0CT86\SQLEXPRESS",
+DB = {"servername": "DESKTOP-1416MJP\SQLEXPRESS",
       "database": "greatoutdoors"}
 
 export_conn = pyodbc.connect('DRIVER={SQL Server};SERVER=' + DB['servername'] + 
@@ -25,6 +25,7 @@ product_line = pd.read_sql_query("SELECT * FROM product_line;", sales_db)
 
 sales_branch = pd.read_sql_query("SELECT * FROM sales_branch;", sales_db)
 retailer_site = pd.read_sql_query("SELECT * FROM retailer_site;", sales_db)
+
 product_type = pd.read_sql_query("SELECT * FROM product_type;", sales_db)
 returns = pd.read_sql_query("SELECT * FROM returned_item;", sales_db)
 order_details = pd.read_sql_query("SELECT * FROM order_details;", sales_db)
@@ -45,6 +46,9 @@ sales_staff_go_staff = pd.read_sql_query("SELECT * FROM sales_staff;", staff_db)
 
 crm_db = sqlite3.connect("Databases/GreatOutdoors/go_crm.sqlite")
 age_group = pd.read_sql_query("SELECT * FROM age_group;", crm_db)
+retailer = pd.read_sql_query("SELECT * FROM retailer;", crm_db)
+retailer_type = pd.read_sql_query("SELECT * FROM retailer_type;", crm_db)
+
 
 
 def import_product():
@@ -77,6 +81,26 @@ def import_product():
     export_cursor.commit()
     logger.info(f"Imported {product_count} products")
 
+def import_product_type():
+    # Product Type
+
+    product_count = 0
+    for index, row in product_type.iterrows():
+        try:
+            query = f"INSERT INTO PRODUCT_TYPE VALUES ({row['PRODUCT_TYPE_CODE']}, {row['PRODUCT_LINE_CODE']},  '{row['PRODUCT_TYPE_EN']}');"
+            export_cursor.execute(query)
+            product_count += 1
+        except pyodbc.Error as e:
+            logger.error(f"Failed to load Product Line with ID: {row['PRODUCT_TYPE_CODE']}")
+            logger.error(query)
+            logger.error(e)
+            exit(-1)
+
+    export_cursor.commit()
+    logger.info(f"Imported {product_count} product types")
+
+
+
 def import_orders():
     # Order
     merged_df = pd.merge(order_header, order_details, on='ORDER_NUMBER', how='inner')
@@ -85,7 +109,9 @@ def import_orders():
     order_count = 0
     for index, row in order.iterrows():
         try:
-            query = f"INSERT INTO orders VALUES ({row['ORDER_NUMBER']}, '{escape_single_quotes(row['RETAILER_NAME'])}', '{row['ORDER_DATE']}', {get_day(row['ORDER_DATE'])}, {get_month(row['ORDER_DATE'])}, {get_year(row['ORDER_DATE'])}, {row['ORDER_DETAIL_CODE']}, {row['PRODUCT_NUMBER']}, {row['QUANTITY']}, {row['UNIT_COST']}, {row['UNIT_PRICE']}, {row['UNIT_SALE_PRICE']}, {row['RETURN_CODE'] if row['RETURN_CODE'] == 'nan' else 'NULL' }, '{convert_date_format(strip_time_from_string(row['RETURN_DATE'])) if convert_date_format(strip_time_from_string(row['RETURN_DATE'])) != "NULL" else '1-1-1970' }', {row['RETURN_REASON_CODE'] if row['RETURN_REASON_CODE'] == 'nan' else "NULL"}, {row['RETURN_QUANTITY'] if row['RETURN_QUANTITY'] == 'nan' else "NULL"}, {row['ORDER_METHOD_CODE']}, {row['SALES_STAFF_CODE']}, {row['SALES_BRANCH_CODE']}, {row['RETAILER_SITE_CODE']});"
+            query = f"INSERT INTO orders (order_number_pk, retailer_name, order_date, order_day, order_month, order_year, order_detail_code, order_detail_product_number, order_detail_quantity, order_detail_unit_cost, order_detail_unit_price, order_detail_unit_sale_price, return_code, return_date, return_reason_code, return_quantity, order_method_code, sales_staff_code_fk, sales_staff_code_fsk, sales_branch_code, retailer_site_code) VALUES ({row['ORDER_NUMBER']}, '{escape_single_quotes(row['RETAILER_NAME'])}', '{row['ORDER_DATE']}', {get_day(row['ORDER_DATE'])}, {get_month(row['ORDER_DATE'])}, {get_year(row['ORDER_DATE'])}, {row['ORDER_DETAIL_CODE']}, {row['PRODUCT_NUMBER']}, {row['QUANTITY']}, {row['UNIT_COST']}, {row['UNIT_PRICE']}, {row['UNIT_SALE_PRICE']}, {row['RETURN_CODE'] if row['RETURN_CODE'] == 'nan' else 'NULL' }, '{convert_date_format(strip_time_from_string(row['RETURN_DATE'])) if convert_date_format(strip_time_from_string(row['RETURN_DATE'])) != "NULL" else '1970-1-1' }', {row['RETURN_REASON_CODE'] if row['RETURN_REASON_CODE'] == 'nan' else "NULL"}, {row['RETURN_QUANTITY'] if row['RETURN_QUANTITY'] == 'nan' else "NULL"}, {row['ORDER_METHOD_CODE']}, {row['SALES_STAFF_CODE']}, {row['SALES_STAFF_CODE']}, {row['SALES_BRANCH_CODE']}, {row['RETAILER_SITE_CODE']});"
+            if(order_count > 43060):
+                print(query)
             export_cursor.execute(query)
             order_count += 1
         except pyodbc.Error as e:
@@ -94,7 +120,12 @@ def import_orders():
             logger.error(e)
             exit(-1)
 
+    # install trigger after importing (faster import)
+
+    install_trigger = "CREATE TRIGGER update_fsk_after_order_insert ON orders AFTER INSERT AS BEGIN UPDATE o SET o.SALES_STAFF_CODE_FSK = ss.SALES_STAFF_CODE_SK FROM orders o INNER JOIN inserted i ON o.SALES_STAFF_CODE_FK = i.SALES_STAFF_CODE_FK INNER JOIN (SELECT sales_staff.SALES_STAFF_CODE_PK, MAX(sales_staff.SALES_STAFF_CODE_SK) AS MAX_SALES_STAFF_CODE_SK FROM sales_staff INNER JOIN inserted ON sales_staff.SALES_STAFF_CODE_PK = inserted.SALES_STAFF_CODE_FK WHERE sales_staff.timestmp <= inserted.tstamp GROUP BY sales_staff.SALES_STAFF_CODE_PK) ss_max ON i.SALES_STAFF_CODE_FK = ss_max.SALES_STAFF_CODE_PK INNER JOIN sales_staff ss ON ss.SALES_STAFF_CODE_PK = ss_max.SALES_STAFF_CODE_PK AND ss.SALES_STAFF_CODE_SK = ss_max.MAX_SALES_STAFF_CODE_SK WHERE o.tstamp = i.tstamp; END;"
+    export_cursor.execute(install_trigger)
     export_cursor.commit()
+    logger.info("Installed Trigger: update_fsk_after_order_insert")
     logger.info(f"Imported {order_count} orders")
 
 def import_order_method():
@@ -150,6 +181,8 @@ def import_satisfaction():
     for index, row in satisfaction.iterrows():
         try:
             query = f"INSERT INTO satisfaction VALUES ({row['YEAR']}, {row['SALES_STAFF_CODE']},{row['SATISFACTION_TYPE_CODE']});"
+            
+
             export_cursor.execute(query)
             satisfaction_count += 1
         except pyodbc.Error as e:
@@ -184,6 +217,8 @@ def import_sales_branch():
         try:
             query = f"INSERT INTO sales_branch VALUES ({row['SALES_BRANCH_CODE']}, '{escape_single_quotes(row['ADDRESS1'])}', '{row['ADDRESS2']}', '{row['CITY']}', '{row['REGION']}', '{row['POSTAL_ZONE']}', {row['COUNTRY_CODE']});"
             export_cursor.execute(query)
+
+            
             sales_branch_count += 1
         except pyodbc.Error as e:
             logger.error(f"Failed to load sales branch with index: {index}")
@@ -200,6 +235,9 @@ def import_sales_staff():
         try:
             query = f"INSERT INTO sales_staff (SALES_STAFF_CODE_PK,FIRST_NAME,LAST_NAME,POSITION_EN,WORK_PHONE,EXTENSION,FAX,EMAIL,DATE_HIRED_DATE,SALES_BRANCH_CODE, MANAGER_CODE) VALUES ({row['SALES_STAFF_CODE']}, '{escape_single_quotes(row['FIRST_NAME'])}', '{row['LAST_NAME']}', '{row['POSITION_EN']}', '{row['WORK_PHONE']}', '{row['EXTENSION']}', '{row['FAX']}', '{row['EMAIL']}',  '{row['DATE_HIRED']}',{row['SALES_BRANCH_CODE']}, {row['MANAGER_CODE']});"
             export_cursor.execute(query)
+
+            if(row['SALES_STAFF_CODE'] == '27'):
+                print(query)
             sales_staff_count += 1
         except pyodbc.Error as e:
             logger.error(f"Failed to load sales staff with index: {index}")
@@ -264,27 +302,54 @@ def import_sales_target_data():
     export_cursor.commit()
     logger.info(f"Imported {target_data_count} target data entries")
 
+def import_retailer_site_data():
+    retailer_data_count = 0
+    fully_merged_retailer_site = retailer_site.merge(right=retailer, how='inner', on="RETAILER_CODE").merge(right=retailer_type, how='inner', on="RETAILER_TYPE_CODE" ).drop(["TRIAL219", "TRIAL222", "TRIAL888"], axis=1)
+    
+    print(fully_merged_retailer_site.columns)
+    for index, row in fully_merged_retailer_site.iterrows():
+        try:
+            print(row)
+            query = f"INSERT INTO retailer_site (RETAILER_SITE_CODE,RETAILER_TYPE_CODE,RETAILER_TYPE_EN,RETAILER_CODE,RETAILER_COMPANY_NAME,RETAILER_CONTACT_code,RETAILER_HEADQUARTERS_phone,RETAILER_HEADQUARTERS_fax,RETAILER_HEADQUARTERS_segment_code,COUNTRY_code, REGION_name, CITY_name, RETAILER_SITE_address1, RETAILER_SITE_address2, POSTAL_ZONE_text, ACTIVE_INDICATOR_code) VALUES ({row['RETAILER_SITE_CODE']}, {row['RETAILER_TYPE_CODE']}, '{row['RETAILER_TYPE_EN']}', {row['RETAILER_CODE']}, '{escape_single_quotes(row['COMPANY_NAME'])}', 0, 0, 0,0,{row['COUNTRY_CODE']},'{row['REGION']}','{escape_single_quotes(row['CITY'])}',0,0,0,0);"
+            print(query)
+            export_cursor.execute(query)
+            retailer_data_count += 1
+    
+        except pyodbc.Error as e:
+            logger.error(f"Failed to load retailer site entry with index: {retailer_data_count}")
+            logger.error(query)
+            logger.error(e)
+            exit(-1)
+
+    export_cursor.commit()
+    logger.info(f"Imported {retailer_data_count} retailer site entries")
 
 
-# CREATE TRIGGER update_fsk_after_pk_update
+
+# CREATE TRIGGER update_fsk_after_order_insert
 # ON orders
-# AFTER UPDATE
+# AFTER INSERT
 # AS
 # BEGIN
-#     UPDATE orders
-#     SET sales_staff_code_FK = (
-#         SELECT TOP 1 sales_staff_code_FSK
-#         FROM inserted
-#         WHERE sales_staff_code_fk = orders.sales_staff_code_fk
-#         ORDER BY (SELECT timestmp FROM sales_staff WHERE sales_staff_code_FK = orders.sales_staff_code_FK) DESC
-#     )
-#     FROM orders
-#     INNER JOIN inserted ON orders.sales_staff_code_fk = orders.sales_staff_code_fk;
+#     UPDATE o
+#     SET o.SALES_STAFF_CODE_FSK = ss.SALES_STAFF_CODE_SK
+#     FROM orders o
+#     INNER JOIN inserted i ON o.SALES_STAFF_CODE_FK = i.SALES_STAFF_CODE_FK
+#     INNER JOIN (
+#         SELECT sales_staff.SALES_STAFF_CODE_PK, MAX(sales_staff.SALES_STAFF_CODE_SK) AS MAX_SALES_STAFF_CODE_SK
+#         FROM sales_staff
+#         INNER JOIN inserted ON sales_staff.SALES_STAFF_CODE_PK = inserted.SALES_STAFF_CODE_FK
+#         WHERE sales_staff.timestmp <= inserted.tstamp
+#         GROUP BY sales_staff.SALES_STAFF_CODE_PK
+#     ) ss_max ON i.SALES_STAFF_CODE_FK = ss_max.SALES_STAFF_CODE_PK
+#     INNER JOIN sales_staff ss ON ss.SALES_STAFF_CODE_PK = ss_max.SALES_STAFF_CODE_PK AND ss.SALES_STAFF_CODE_SK = ss_max.MAX_SALES_STAFF_CODE_SK
+#     WHERE o.tstamp = i.tstamp;
 # END;
 
+
+
+
 # INSERT INTO sales_staff (SALES_STAFF_CODE_PK,FIRST_NAME,LAST_NAME,POSITION_EN,WORK_PHONE,EXTENSION,FAX,EMAIL,DATE_HIRED_DATE,SALES_BRANCH_CODE, MANAGER_CODE) VALUES (100, 'Tuomasso', 'Savolainen', 'Level 2 Sales Representative', '+358(0)17 - 433 127', '825', '+358(0)17 - 433 129', 'TSavolainen@grtd123.com',  '23-Jul-1998 12:00:00 AM',31, 18)
-
-
 
 
 

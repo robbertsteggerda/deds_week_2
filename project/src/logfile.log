@@ -1,0 +1,28 @@
+2024-04-03 07:58:29.036 | INFO     | db_connection:<module>:16 - Opening local database: go_sales.sqlite
+2024-04-03 07:59:36.469 | INFO     | db_connection:<module>:16 - Opening local database: go_sales.sqlite
+2024-04-03 07:59:36.610 | INFO     | __main__:main:4 - Loading raw data
+2024-04-03 07:59:36.610 | INFO     | __main__:main:6 - Moving processed data table: Product into database
+2024-04-03 07:59:36.657 | INFO     | db_connection:import_product:78 - Imported 115 products
+2024-04-03 07:59:36.657 | INFO     | __main__:main:9 - Moving processed data table: Order into database
+2024-04-03 07:59:47.375 | INFO     | db_connection:import_orders:98 - Imported 43063 orders
+2024-04-03 07:59:47.381 | INFO     | __main__:main:12 - Moving processed data table: Order Method into database
+2024-04-03 07:59:47.384 | INFO     | db_connection:import_order_method:114 - Imported 7 order method(s)
+2024-04-03 07:59:47.384 | INFO     | __main__:main:15 - Moving processed data table: Course into database
+2024-04-03 07:59:47.387 | INFO     | db_connection:import_course:130 - Imported 9 course(s)
+2024-04-03 07:59:47.387 | INFO     | __main__:main:18 - Moving processed data table: Training into database
+2024-04-03 07:59:47.458 | INFO     | db_connection:import_training:178 - Imported 402 training entries
+2024-04-03 07:59:47.458 | INFO     | __main__:main:21 - Moving processed data table: Satisfaction_Type into database
+2024-04-03 07:59:47.460 | INFO     | db_connection:import_satisfaction_type:146 - Imported 5 satisfaction type(s)
+2024-04-03 07:59:47.460 | INFO     | __main__:main:24 - Moving processed data table: Satisfaction into database
+2024-04-03 07:59:47.514 | INFO     | db_connection:import_satisfaction:162 - Imported 301 satisfaction entries
+2024-04-03 07:59:47.515 | INFO     | __main__:main:27 - Moving processed data table: Sales Branch into database
+2024-04-03 07:59:47.522 | INFO     | db_connection:import_sales_branch:195 - Imported 28 sale branch(es)
+2024-04-03 07:59:47.522 | INFO     | __main__:main:30 - Moving processed data table: Sales Staff into database
+2024-04-03 07:59:47.545 | INFO     | db_connection:import_sales_staff:211 - Imported 102 sales staff entries
+2024-04-03 07:59:47.545 | INFO     | __main__:main:33 - Moving processed data table: Country into database
+2024-04-03 07:59:47.552 | INFO     | db_connection:import_country:232 - Imported 21 countries
+2024-04-03 07:59:47.553 | INFO     | __main__:main:36 - Moving processed data table: Age Group into database
+2024-04-03 07:59:47.555 | INFO     | db_connection:import_age_group:248 - Imported 6 age group(s)
+2024-04-03 07:59:47.555 | INFO     | __main__:main:39 - Moving processed data table: Sales Target Data into database
+2024-04-03 07:59:54.873 | INFO     | db_connection:import_sales_target_data:265 - Imported 39530 target data entries
+2024-04-03 07:59:54.875 | SUCCESS  | __main__:main:45 - Imported all tables!
