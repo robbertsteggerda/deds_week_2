@@ -16,8 +16,6 @@ export_cursor = export_conn.cursor()
 logger.info("Opening local database: go_sales.sqlite")
 sales_db = sqlite3.connect("Databases/GreatOutdoors/go_sales.sqlite")
 
-sales_db = sqlite3.connect("Databases/GreatOutdoors/go_sales.sqlite")
-
 
 product = pd.read_sql_query("SELECT * FROM product;", sales_db)
 country = pd.read_sql_query("SELECT * FROM country;", sales_db)
@@ -104,12 +102,40 @@ def import_product_type():
 def import_orders():
     # Order
     merged_df = pd.merge(order_header, order_details, on='ORDER_NUMBER', how='inner')
-    order = pd.merge(merged_df, returned_item, on='ORDER_DETAIL_CODE', how = 'left')
+    order = pd.merge(merged_df, returned_item, on='ORDER_DETAIL_CODE', how = 'left').merge(returned_item, how='left', left_on="ORDER_DETAIL_CODE", right_on="ORDER_DETAIL_CODE")
+
+    order = order.drop(['RETURN_DATE_x', 'RETURN_REASON_CODE_x', 'RETURN_QUANTITY_x'], axis=1).rename(columns={
+    "ORDER_DETAIL_CODE_x": "ORDER_DETAIL_CODE",
+    "RETURN_REASON_CODE_y": "RETURN_REASON_CODE",
+    "RETURN_QUANTITY_y": "RETURN_QUANTITY",
+    "RETURN_DATE_y": "RETURN_DATE",
+    "RETURN_CODE_y": "RETURN_CODE"
+    })
+    # print(order.loc[order['ORDER_NUMBER'] == "1229", :])
+
+    # print(order.columns)
 
     order_count = 0
     for index, row in order.iterrows():
         try:
-            query = f"INSERT INTO orders (order_number_pk, retailer_name, order_date, order_day, order_month, order_year, order_detail_code, order_detail_product_number, order_detail_quantity, order_detail_unit_cost, order_detail_unit_price, order_detail_unit_sale_price, return_code, return_date, return_reason_code, return_quantity, order_method_code, sales_staff_code_fk, sales_staff_code_fsk, sales_branch_code, retailer_site_code) VALUES ({row['ORDER_NUMBER']}, '{escape_single_quotes(row['RETAILER_NAME'])}', '{row['ORDER_DATE']}', {get_day(row['ORDER_DATE'])}, {get_month(row['ORDER_DATE'])}, {get_year(row['ORDER_DATE'])}, {row['ORDER_DETAIL_CODE']}, {row['PRODUCT_NUMBER']}, {row['QUANTITY']}, {row['UNIT_COST']}, {row['UNIT_PRICE']}, {row['UNIT_SALE_PRICE']}, {row['RETURN_CODE'] if row['RETURN_CODE'] == 'nan' else 'NULL' }, '{convert_date_format(strip_time_from_string(row['RETURN_DATE'])) if convert_date_format(strip_time_from_string(row['RETURN_DATE'])) != "NULL" else '1970-1-1' }', {row['RETURN_REASON_CODE'] if row['RETURN_REASON_CODE'] == 'nan' else "NULL"}, {row['RETURN_QUANTITY'] if row['RETURN_QUANTITY'] == 'nan' else "NULL"}, {row['ORDER_METHOD_CODE']}, {row['SALES_STAFF_CODE']}, {row['SALES_STAFF_CODE']}, {row['SALES_BRANCH_CODE']}, {row['RETAILER_SITE_CODE']});"
+            return_date = convert_date_format(strip_time_from_string(row['RETURN_DATE'])) if convert_date_format(strip_time_from_string(row['RETURN_DATE'])) != "NULL" else "NULL"
+            return_code = row['RETURN_CODE'] if row['RETURN_CODE'] != 'nan' else 'NULL'
+            return_reason_code = row['RETURN_REASON_CODE'] if row['RETURN_REASON_CODE'] != 'nan' else 'NULL'
+            return_quantity = row['RETURN_QUANTITY'] if row['RETURN_QUANTITY'] != 'nan' else 'NULL'
+            
+            
+            # print(f"return code: {row['RETURN_CODE']}")
+            # print(f"return reason code: {row['RETURN_REASON_CODE']}")
+            # print(f"return quantity: {row['RETURN_QUANTITY']}")
+
+
+            if return_date != "NULL": # date is available
+                query = f"INSERT INTO orders (order_number_pk, retailer_name, order_date, order_day, order_month, order_year, order_detail_code, order_detail_product_number, order_detail_quantity, order_detail_unit_cost, order_detail_unit_price, order_detail_unit_sale_price, return_code, return_date, return_reason_code, return_quantity, order_method_code, sales_staff_code_fk, sales_staff_code_fsk, sales_branch_code, retailer_site_code) VALUES ({row['ORDER_NUMBER']}, '{escape_single_quotes(row['RETAILER_NAME'])}', '{row['ORDER_DATE']}', {get_day(row['ORDER_DATE'])}, {get_month(row['ORDER_DATE'])}, {get_year(row['ORDER_DATE'])}, {row['ORDER_DETAIL_CODE']}, {row['PRODUCT_NUMBER']}, {row['QUANTITY']}, {row['UNIT_COST']}, {row['UNIT_PRICE']}, {row['UNIT_SALE_PRICE']}, {return_code}, '{return_date}', {return_reason_code}, {return_quantity}, {row['ORDER_METHOD_CODE']}, {row['SALES_STAFF_CODE']}, {row['SALES_STAFF_CODE']}, {row['SALES_BRANCH_CODE']}, {row['RETAILER_SITE_CODE']});"
+            else:    
+                query = f"INSERT INTO orders (order_number_pk, retailer_name, order_date, order_day, order_month, order_year, order_detail_code, order_detail_product_number, order_detail_quantity, order_detail_unit_cost, order_detail_unit_price, order_detail_unit_sale_price, return_code, return_date, return_reason_code, return_quantity, order_method_code, sales_staff_code_fk, sales_staff_code_fsk, sales_branch_code, retailer_site_code) VALUES ({row['ORDER_NUMBER']}, '{escape_single_quotes(row['RETAILER_NAME'])}', '{row['ORDER_DATE']}', {get_day(row['ORDER_DATE'])}, {get_month(row['ORDER_DATE'])}, {get_year(row['ORDER_DATE'])}, {row['ORDER_DETAIL_CODE']}, {row['PRODUCT_NUMBER']}, {row['QUANTITY']}, {row['UNIT_COST']}, {row['UNIT_PRICE']}, {row['UNIT_SALE_PRICE']}, {row['RETURN_CODE'] if row['RETURN_CODE'] == 'nan' else 'NULL' }, {return_date}, {row['RETURN_REASON_CODE'] if row['RETURN_REASON_CODE'] == 'nan' else "NULL"}, {row['RETURN_QUANTITY'] if row['RETURN_QUANTITY'] == 'nan' else "NULL"}, {row['ORDER_METHOD_CODE']}, {row['SALES_STAFF_CODE']}, {row['SALES_STAFF_CODE']}, {row['SALES_BRANCH_CODE']}, {row['RETAILER_SITE_CODE']});"
+            if(row['ORDER_NUMBER'] == '1229'):
+                print(row)
+                print(row['RETURN_CODE'])
             if(order_count > 43060):
                 print(query)
             export_cursor.execute(query)
@@ -233,7 +259,7 @@ def import_sales_staff():
     sales_staff_count = 0
     for index, row in sales_staff_go_staff.iterrows():
         try:
-            query = f"INSERT INTO sales_staff (SALES_STAFF_CODE_PK,FIRST_NAME,LAST_NAME,POSITION_EN,WORK_PHONE,EXTENSION,FAX,EMAIL,DATE_HIRED_DATE,SALES_BRANCH_CODE, MANAGER_CODE) VALUES ({row['SALES_STAFF_CODE']}, '{escape_single_quotes(row['FIRST_NAME'])}', '{row['LAST_NAME']}', '{row['POSITION_EN']}', '{row['WORK_PHONE']}', '{row['EXTENSION']}', '{row['FAX']}', '{row['EMAIL']}',  '{row['DATE_HIRED']}',{row['SALES_BRANCH_CODE']}, {row['MANAGER_CODE']});"
+            query = f"INSERT INTO sales_staff (SALES_STAFF_CODE_PK,SALES_STAFF_FIRST_NAME,SALES_STAFF_LAST_NAME,SALES_STAFF_POSITION_EN,SALES_STAFF_WORK_PHONE,SALES_STAFF_EXTENSION,SALES_STAFF_FAX,SALES_STAFF_EMAIL,SALES_STAFF_DATE_HIRED_DATE,SALES_STAFF_SALES_BRANCH_CODE, SALES_STAFF_MANAGER_CODE) VALUES ({row['SALES_STAFF_CODE']}, '{escape_single_quotes(row['FIRST_NAME'])}', '{row['LAST_NAME']}', '{row['POSITION_EN']}', '{row['WORK_PHONE']}', '{row['EXTENSION']}', '{row['FAX']}', '{row['EMAIL']}',  '{row['DATE_HIRED']}',{row['SALES_BRANCH_CODE']}, {row['MANAGER_CODE']});"
             export_cursor.execute(query)
 
             if(row['SALES_STAFF_CODE'] == '27'):
@@ -303,27 +329,71 @@ def import_sales_target_data():
     logger.info(f"Imported {target_data_count} target data entries")
 
 def import_retailer_site_data():
-    retailer_data_count = 0
+    retailer_site_data_count = 0
     fully_merged_retailer_site = retailer_site.merge(right=retailer, how='inner', on="RETAILER_CODE").merge(right=retailer_type, how='inner', on="RETAILER_TYPE_CODE" ).drop(["TRIAL219", "TRIAL222", "TRIAL888"], axis=1)
     
-    print(fully_merged_retailer_site.columns)
+    # print(fully_merged_retailer_site.columns)
     for index, row in fully_merged_retailer_site.iterrows():
         try:
-            print(row)
-            query = f"INSERT INTO retailer_site (RETAILER_SITE_CODE,RETAILER_TYPE_CODE,RETAILER_TYPE_EN,RETAILER_CODE,RETAILER_COMPANY_NAME,RETAILER_CONTACT_code,RETAILER_HEADQUARTERS_phone,RETAILER_HEADQUARTERS_fax,RETAILER_HEADQUARTERS_segment_code,COUNTRY_code, REGION_name, CITY_name, RETAILER_SITE_address1, RETAILER_SITE_address2, POSTAL_ZONE_text, ACTIVE_INDICATOR_code) VALUES ({row['RETAILER_SITE_CODE']}, {row['RETAILER_TYPE_CODE']}, '{row['RETAILER_TYPE_EN']}', {row['RETAILER_CODE']}, '{escape_single_quotes(row['COMPANY_NAME'])}', 0, 0, 0,0,{row['COUNTRY_CODE']},'{row['REGION']}','{escape_single_quotes(row['CITY'])}',0,0,0,0);"
-            print(query)
+            # print(row)
+            query = f"INSERT INTO retailer_site (RETAILER_SITE_CODE,RETAILER_TYPE_CODE,RETAILER_TYPE_EN,RETAILER_CODE,RETAILER_COMPANY_NAME,RETAILER_CONTACT_code,RETAILER_HEADQUARTERS_phone,RETAILER_HEADQUARTERS_fax,RETAILER_HEADQUARTERS_segment_code, RETAILER_SITE_COUNTRY_code, RETAILER_SITE_REGION_name, RETAILER_SITE_CITY_name, RETAILER_SITE_address1, RETAILER_SITE_address2, RETAILER_SITE_POSTAL_ZONE_text, ACTIVE_INDICATOR_code) VALUES ({row['RETAILER_SITE_CODE']}, {row['RETAILER_TYPE_CODE']}, '{row['RETAILER_TYPE_EN']}', {row['RETAILER_CODE']}, '{escape_single_quotes(row['COMPANY_NAME'])}', 0, 0, 0,0,{row['COUNTRY_CODE']},'{row['REGION']}','{escape_single_quotes(row['CITY'])}',0,0,0,0);"
+            # print(query)
             export_cursor.execute(query)
-            retailer_data_count += 1
+            retailer_site_data_count += 1
     
         except pyodbc.Error as e:
-            logger.error(f"Failed to load retailer site entry with index: {retailer_data_count}")
+            logger.error(f"Failed to load retailer site entry with index: {retailer_site_data_count}")
             logger.error(query)
             logger.error(e)
             exit(-1)
 
     export_cursor.commit()
-    logger.info(f"Imported {retailer_data_count} retailer site entries")
+    logger.info(f"Imported {retailer_site_data_count} retailer site entries")
 
+# def import_retailer():
+#     retailer_data_count = 0
+#     fully_merged_retailer_site = retailer_site.merge(right=retailer, how='inner', on="RETAILER_CODE").merge(right=retailer_type, how='inner', on="RETAILER_TYPE_CODE" ).drop(["TRIAL219", "TRIAL222", "TRIAL888"], axis=1)
+    
+#     # print(fully_merged_retailer_site.columns)
+#     for index, row in fully_merged_retailer_site.iterrows():
+#         try:
+#             # print(row)
+#             query = f"INSERT INTO retailer_site (RETAILER_SITE_CODE,RETAILER_TYPE_CODE,RETAILER_TYPE_EN,RETAILER_CODE,RETAILER_COMPANY_NAME,RETAILER_CONTACT_code,RETAILER_HEADQUARTERS_phone,RETAILER_HEADQUARTERS_fax,RETAILER_HEADQUARTERS_segment_code,COUNTRY_code, REGION_name, CITY_name, RETAILER_SITE_address1, RETAILER_SITE_address2, POSTAL_ZONE_text, ACTIVE_INDICATOR_code) VALUES ({row['RETAILER_SITE_CODE']}, {row['RETAILER_TYPE_CODE']}, '{row['RETAILER_TYPE_EN']}', {row['RETAILER_CODE']}, '{escape_single_quotes(row['COMPANY_NAME'])}', 0, 0, 0,0,{row['COUNTRY_CODE']},'{row['REGION']}','{escape_single_quotes(row['CITY'])}',0,0,0,0);"
+#             # print(query)
+#             export_cursor.execute(query)
+#             retailer_data_count += 1
+    
+#         except pyodbc.Error as e:
+#             logger.error(f"Failed to load retailer site entry with index: {retailer_data_count}")
+#             logger.error(query)
+#             logger.error(e)
+#             exit(-1)
+
+#     export_cursor.commit()
+#     logger.info(f"Imported {retailer_data_count} retailer site entries")
+
+
+
+
+def import_return_reason():
+    return_reason_count = 0
+
+    for index, row in return_reason.iterrows():
+        try:
+            print(row)
+            query = f"INSERT INTO return_reason (RETURN_REASON_CODE,RETURN_REASON_DESCRIPTION) VALUES ({row['RETURN_REASON_CODE']}, '{row['RETURN_DESCRIPTION_EN']}');"
+            # print(query)
+            export_cursor.execute(query)
+            return_reason_count += 1
+    
+        except pyodbc.Error as e:
+            logger.error(f"Failed to load return reason entry with index: {return_reason_count}")
+            logger.error(query)
+            logger.error(e)
+            exit(-1)
+
+    export_cursor.commit()
+    logger.info(f"Imported {return_reason_count} return reason entries")
 
 
 # CREATE TRIGGER update_fsk_after_order_insert
